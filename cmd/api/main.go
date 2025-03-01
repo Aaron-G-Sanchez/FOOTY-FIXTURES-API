@@ -21,5 +21,5 @@ func init() {
 }
 
 func main() {
-	routes.Run()
+	routes.Run(API_TOKEN)
 }

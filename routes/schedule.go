@@ -1,8 +1,7 @@
 package routes
 
 import (
-	"net/http"
-
+	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/handlers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,8 +9,6 @@ func addScheduleRoutes(rg *gin.RouterGroup) {
 	schedule := rg.Group("/schedule")
 
 	schedule.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"msg": "Schedule route hit!",
-		})
+		handlers.HelloWorld(ctx)
 	})
 }
