@@ -1,10 +1,13 @@
 package utility
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/types"
 )
 
 var urls = map[string]string{
@@ -31,5 +34,11 @@ func FetchTeamData(token string) {
 		log.Fatal("Error reading body: ", err)
 	}
 
-	fmt.Println(string(body))
+	var teamRes types.TeamResponse
+	err = json.Unmarshal(body, &teamRes)
+	if err != nil {
+		log.Fatal("Error unmashalling response: ", err)
+	}
+
+	fmt.Println(teamRes)
 }
