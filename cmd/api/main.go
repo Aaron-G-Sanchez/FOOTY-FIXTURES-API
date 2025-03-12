@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
@@ -25,5 +26,9 @@ func init() {
 func main() {
 	// routes.Run(API_TOKEN)
 	// TODO: Remove after testing.
-	utility.FetchTeamData(API_TOKEN)
+	teams := utility.FetchTeamData(API_TOKEN)
+
+	for _, team := range teams.Data {
+		fmt.Println(team)
+	}
 }
