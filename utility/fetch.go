@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/config"
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/types"
 )
 
@@ -14,10 +15,10 @@ var urls = map[string]string{
 	"teamsBySeasonId": "https://api.sportmonks.com/v3/football/teams/seasons/24962?api_token=%v",
 }
 
-func FetchTeamData(token string) types.TeamResponse {
+func FetchTeamData() types.TeamResponse {
 	client := &http.Client{}
 
-	endpoint := fmt.Sprintf(urls["teamsBySeasonId"], token)
+	endpoint := fmt.Sprintf(urls["teamsBySeasonId"], config.AppConfig.APIToken)
 	req, err := http.NewRequest("GET", endpoint, nil)
 	if err != nil {
 		log.Fatal("err: ", err)
