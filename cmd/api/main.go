@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
 
 	// "github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/routes"
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/config"
-	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/utility"
+	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/db"
 )
 
 func init() {
@@ -13,11 +12,7 @@ func init() {
 }
 
 func main() {
+	// TODO: Place behind arguments flag.
 	// routes.Run(API_TOKEN)
-	// TODO: Remove after testing.
-	teams := utility.FetchTeamData()
-
-	for _, team := range teams.Data {
-		fmt.Println(team)
-	}
+	db.PopulateDB()
 }
