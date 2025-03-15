@@ -11,7 +11,13 @@ type Config struct {
 	APIToken string
 }
 
+type Database struct {
+	StagingURI string
+}
+
 var AppConfig Config
+
+var DatabaseConfig Database
 
 func LoadConfig() {
 	err := godotenv.Load()
@@ -20,4 +26,6 @@ func LoadConfig() {
 	}
 
 	AppConfig.APIToken = os.Getenv("API_TOKEN")
+
+	DatabaseConfig.StagingURI = os.Getenv("STAGING_DB_URI")
 }
