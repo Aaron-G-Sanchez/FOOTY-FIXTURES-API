@@ -3,7 +3,6 @@ package main
 import (
 
 	// "github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/routes"
-	"fmt"
 
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/config"
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/db"
@@ -14,9 +13,12 @@ func init() {
 }
 
 func main() {
-	// TODO: Place behind arguments flag.
-	// routes.Run(API_TOKEN)
-	db.PopulateDB()
+	// TODO: Pass desired enviroment into db.Connect via command line flags.
+	database := db.Connect(config.DatabaseConfig.StagingURI)
+	defer database.Close()
 
-	fmt.Println(config.DatabaseConfig.StagingURI)
+	// TODO: Place behind command line flags.
+	db.PopulateDB(database)
+
+	// routes.Run(API_TOKEN)
 }

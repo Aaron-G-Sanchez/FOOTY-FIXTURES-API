@@ -1,16 +1,21 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
+	"log"
 
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/utility"
 )
 
-func PopulateDB() {
+func PopulateDB(database *sql.DB) {
 	teams := utility.FetchTeamData()
 
-	fmt.Println("Data Fetched")
-	for _, team := range teams.Data {
-		fmt.Println(team.Name)
+	err := database.Ping()
+	if err != nil {
+		log.Fatal("DB not responding.")
 	}
+
+	// TODO: Write team data to DB.
+	fmt.Println(teams)
 }
