@@ -4,10 +4,11 @@ import (
 
 	// "github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/routes"
 
-	"log"
+	"fmt"
 
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/config"
 	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/db"
+	"github.com/aaron-g-sanchez/PROJECTS/FOOTY-FIXTURES-DISCORD-BOT-API/utility"
 )
 
 func init() {
@@ -20,13 +21,17 @@ func main() {
 
 func run() {
 	// TODO: Pass desired enviroment into db.Connect via command line flags.
+	// Default enviroment will be staging.
 	database := db.Connect(config.DatabaseConfig.StagingURI)
 	defer database.Close()
 
-	// TODO: Place behind command line flags.
-	err := db.PopulateDB(database)
-	if err != nil {
-		log.Fatal("Error populating database: ", err)
-	}
 	// routes.Run(API_TOKEN)
+
+	data := utility.FetchTeamData()
+
+	teams := data.Data
+
+	for _, team := range teams {
+		fmt.Println(team.Id, team.Name)
+	}
 }
